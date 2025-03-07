@@ -1,11 +1,11 @@
 {
-  "name": "ScrapboxPage Create",
-  "short_name": "scrapboxCreate",
-  "description": "現在のTitleとURLと選択文字列で、Scrapboxの新規ページを作成",
-  "version": "0.2.0",
+  "name": "Scrap4Scrapbox",
+  "short_name": "S4S",
+  "description": "現在のTitleとURLと選択文字列で、Scrapboxの新規ページを作成します",
+  "version": "0.3.0",
   "manifest_version": 3,
   "icons": {
-    "128": "ScrapboxCreatePage.png"
+    "128": "Scrap4Scrapbox.png"
   },
   "permissions": [
     "contextMenus",
