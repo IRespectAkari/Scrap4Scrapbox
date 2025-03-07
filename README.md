@@ -1,1 +1,2 @@
 # ScrapboxCreatePage
+コンテキストメニューにScrapbox(現Cosence)によるページのスクラップを実行するボタンを追加します
