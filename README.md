@@ -11,7 +11,7 @@
 
 ## 使い方
 1. 右クリック時に表示されるコンテキストメニュー（右クリックメニュー）にページ作成ボタンをクリック  
-![image](https://github.com/user-attachments/assets/341f9ce1-2950-44e6-9688-4087cc2f5822)
+![contextmenu picture](https://github.com/user-attachments/assets/341f9ce1-2950-44e6-9688-4087cc2f5822)
 ![image](https://github.com/user-attachments/assets/153bdcda-e332-44d8-be16-106fbb7094da)
 
 1. そのボタン（又は上部の拡張機能ボタン）をクリックするとポップアップにてタイトル案が表示されます  
