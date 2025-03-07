@@ -1,4 +1,4 @@
-# Scrap4Scrapbox
+# Scrap4Scrapbox v0.3.0
 コンテキストメニューにScrapbox(現Cosence)によるページのスクラップを実行するボタンを追加する拡張機能です  
 後述しますが純正ブックマークレットを改良したものです  
 
