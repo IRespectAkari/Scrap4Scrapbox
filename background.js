@@ -1,7 +1,7 @@
 chrome.runtime.onInstalled.addListener(function (details) {
   /* コンテキストメニューを作成 */
   const contextMenu = chrome.contextMenus.create({
-    id: "scrapboxPageCreate",
+    id: "Scrap4Scrapbox",
     title: "新規ページ作成",
     contexts: ["all"],
   });
