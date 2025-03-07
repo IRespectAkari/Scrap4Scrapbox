@@ -1,6 +1,6 @@
 {
   "name": "Scrap4Scrapbox",
-  "short_name": "S4S",
+  "short_name": "s4s",
   "description": "現在のTitleとURLと選択文字列で、Scrapboxの新規ページを作成します",
   "version": "0.3.0",
   "manifest_version": 3,
