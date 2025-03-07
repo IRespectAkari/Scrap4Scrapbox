@@ -43,8 +43,8 @@ function script() {
 
   // 本文作成
   let lines = [`[${replacedTitle} ${window.location.href}]`];
-  const quote = window.getSelection().toString();
-  if (quote.trim()) {
+  const quote = window.getSelection().toString().trim();
+  if (quote) {
     // push
     lines.push(...quote.split(/\n/g).map(line=>`	>${line}`));
   }
