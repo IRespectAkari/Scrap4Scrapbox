@@ -45,9 +45,6 @@ function script() {
   let lines = [`[${replacedTitle} ${window.location.href}]`];
   const quote = window.getSelection().toString();
   if (quote.trim()) {
-    // map後concat
-    // lines = lines.concat(quote.split(/\n/g).map(line=>`	>${line}`));
-
     // push
     lines.push(...quote.split(/\n/g).map(line=>`	>${line}`));
   }
