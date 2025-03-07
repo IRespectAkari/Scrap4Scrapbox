@@ -2,7 +2,7 @@
 コンテキストメニューにScrapbox(現Cosence)によるページのスクラップを実行するボタンを追加する拡張機能です  
 
 ### 注意事項
-これは私自身のために作ったものなので、これを使う場合は[background.js](https://github.com/IRespectAkari/ScrapboxCreatePage/blob/main/background.js)内の`project定数`を自身のプロジェクト名に変更してください  
+これは私自身のために作ったものなので、これを使う場合は[background.js](https://github.com/IRespectAkari/ScrapboxCreatePage/blob/main/background.js)内の`project`定数を**自身の追加したいプロジェクト名**に変更してください  
 
 ## 機能
 - 本文にページのリンクを追加
