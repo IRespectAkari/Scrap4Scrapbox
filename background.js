@@ -32,17 +32,35 @@ function script() {
   };
   // 置換関数
   const replaceAllText = (Title, replaceMap) => Object.keys(replaceMap).reduce((pre, cur) => pre.replaceAll(cur, replaceMap[cur]), Title);
+  // 関数Json
+  const dataJson = {
+    title: "",
+    quoteURL: "",
+  };
+  switch(window.location.origin) {
+    // URLがYoutubeの場合のみ変更する
+    case 'https://www.youtube.com':
+      dataJson.title = document.querySelector(`#title > h1 > yt-formatted-string`).title;
+      dataJson.quoteURL = (t)=>`${t} - [YouTube]\n[${window.location.href}]`;
+      break;
+    // 通常時の動作
+    default:
+      dataJson.title = document.title;
+      dataJson.quoteURL = (t)=>`[${t} ${window.location.href}]`;
+      break;
+  }
 
   // 処理開始
   // タイトル処理
-  const originalTitle = document.title;
+  const originalTitle = dataJson.title;
   const replacedTitle = replaceAllText(originalTitle, replaceTextList);
   const title = window.prompt(promptTxt(replacedTitle), replacedTitle);
   if (!title) return;
   const encodedTitle = encodeURIComponent(title.trim());
 
   // 本文作成
-  let lines = [`[${replacedTitle} ${window.location.href}]`];
+  const lines = [];
+  lines.push(dataJson.quoteURL(replacedTitle));
   const quote = window.getSelection().toString().trim();
   if (quote) {
     // push
