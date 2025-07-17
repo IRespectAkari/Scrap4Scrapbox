@@ -21,6 +21,28 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 // const script = ()=>{var w=window;var t=document.title;var tt=w.prompt(`Scrap "${t}" to my-knowledge.`,t);if (!tt) return;var ls=['['+tt+' '+w.location.href+']'];var q=w.getSelection().toString();if (q.trim()) ls=ls.concat(q.split(/\n/g).map(l=>' > '+l));ls.push('');ls.push('#ブックマーク');var e=encodeURIComponent;var b=e(ls.join('\n'));w.open('https://scrapbox.io/my-knowledge/'+e(tt.trim())+'?body='+b,'新規ページ作成','top=100,left=1000,width=700,height=500')};
 
 function script() {
+  console.log("window.location.origin ->", window.location.origin);
+
+  const regList = [
+    `[0-9]`,
+    `[a-zA-Z]`,
+    `[\u4E00-\u9FFF\u3005-\u3007]`,// 漢字
+    `[\u30A0-\u30FF]`,// カタカナ
+    `[\uFF61-\uFF9F]`,// 半角カタカナ
+  ];
+  function ab(t) {
+    const s = new Set();
+    let rslt = t;
+    for (let r of regList) {
+      t.match(new RegExp(`${r}{2,}`, "g"))?.forEach(e => {
+        if (!s.has(e)) {
+          s.add(e);
+          rslt = rslt.replace(new RegExp(`(?<!${r})${e}(?!${r})`), `[${e}]`);
+        }
+      });
+    }
+    return rslt;
+  }
   // 追加するプロジェクト
   const project = `my-knowledge`;
   // プロンプトに表示されるテキスト
@@ -34,19 +56,34 @@ function script() {
   const replaceAllText = (Title, replaceMap) => Object.keys(replaceMap).reduce((pre, cur) => pre.replaceAll(cur, replaceMap[cur]), Title);
   // 関数Json
   const dataJson = {
-    title: "",
-    quoteURL: "",
+    title: document.title,
+    quoteURL: (t)=>`[${t} ${window.location.href}]`,
+    tags: ["途中", "ブックマーク"]
   };
   switch(window.location.origin) {
-    // URLがYoutubeの場合のみ変更する
+    case "https://scrapbox.io":
+      dataJson.title = document.title.split(" - ")[0];
+      dataJson.quoteURL = (t) => `[${decodeURIComponent(window.location.pathname)}]`;
+      dataJson.tags.push(document.title.split(" - ")[1]);
+      break;
     case 'https://www.youtube.com':
-      dataJson.title = document.querySelector(`#title > h1 > yt-formatted-string`).title;
-      dataJson.quoteURL = (t)=>`${t} - [YouTube]\n[${window.location.href}]`;
+      if (window.location.pathname == "/watch") {
+        dataJson.title = document.querySelector(`#title > h1 > yt-formatted-string`).title;
+        dataJson.quoteURL = (t)=>`${t} - [YouTube]\n[${window.location.href}]`;
+        dataJson.tags.push("後で見る動画");
+        dataJson.tags.push(document.querySelector(`#text > a`).innerText);
+      }
+      break;
+    case 'https://atmarkit.itmedia.co.jp':
+      dataJson.title = document.title.split(" - ")[0];
+      dataJson.tags.push(`＠IT`);
+      break;
+    case 'https://kotobank.jp/word':
+      dataJson.tags.push("コトバンク");
       break;
     // 通常時の動作
     default:
-      dataJson.title = document.title;
-      dataJson.quoteURL = (t)=>`[${t} ${window.location.href}]`;
+      dataJson.tags.push("後で読みたいサイト")
       break;
   }
 
@@ -64,10 +101,12 @@ function script() {
   const quote = window.getSelection().toString().trim();
   if (quote) {
     // push
-    lines.push(...quote.split(/\n/g).map(line=>`	>${line}`));
+    // lines.push(...quote.split(/\n/g).map(line=>`	>${line}`));
+    lines.push(...ab(quote).split(/\n/g).map(line=>`	>${line}`));// <-------------- AutoBracketter 組み込みテスト
   }
   lines.push(``);
-  lines.push(`#ブックマーク`);
+  // (空白|^#)が含まれるならブラケット、でないなら先頭に#、その後lineに追加
+  dataJson.tags.map(e => /(\s|^#)/.test(e) ? `[${e}]` : `#${e}`).reverse().forEach(e => lines.push(e));
   const body = encodeURIComponent(lines.join(`\n`));
 
   // ページ作成実行
