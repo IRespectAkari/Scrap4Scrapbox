@@ -10,9 +10,11 @@
   "permissions": [
     "contextMenus",
     "scripting",
-    "activeTab"
+    "activeTab",
+    "storage"
   ],
   "background": {
     "service_worker": "background-wrapper.js"
-  }
+  },
+  "options_page": "option.html"
 }

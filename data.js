@@ -1,32 +1,21 @@
-const defaultData = {
-  projectName: "my-knowledge",
+const defaultProjectName = "my-knowledge";
+
+let projectName;
+
+function loadProjectName(func) {
+  chrome.storage.local.get("projectName", (data) => {
+    projectName = data["projectName"] || defaultProjectName;
+    if(func) func(projectName);
+  });
 }
 
-let data;
-
-$("#submit").addEventListener("click", dataSetting);
-
-function dataSetting(e) {
-  console.log("dataSetting start");
-
-  const projectName = $(`input[name="projectName"]`).value;
-
-  console.table("プロジェクト名", projectName);
-
-  chrome.storage.local.set({
-    "projectName": projectName
-  });
-
-  console.log("dataSetting end");
-}
-
-function loadSetting() {
-  chrome.storage.local.get("settingDatas", (data) => {
-    localSettingDatas = data["settingDatas"] || defaultSettingDatas;
-  });
+function setProjectName(newProjectName) {
+  projectName = newProjectName;
+  chrome.storage.local.set({ "projectName": newProjectName });
 }
 
 // ----------------------------------------------------------------------------------------------------
+/*
 function loadSettingDatas(func) {
   chrome.storage.local.get("settingDatas", (data) => {
     localSettingDatas = data["settingDatas"] || defaultSettingDatas;
@@ -46,3 +35,4 @@ function saveSettingDatas(settingDatas) {
     });
   });
 }
+*/

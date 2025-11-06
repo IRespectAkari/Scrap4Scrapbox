@@ -1,6 +1,9 @@
-self.importScripts("data.js");
+// self.importScripts("data.js");
 
-defaultData
+let projectName;
+chrome.storage.local.get("projectName", (data) => {
+  projectName = data["projectName"] || "my-knowldge";
+})
 
 chrome.runtime.onInstalled.addListener(function (details) {
   /* コンテキストメニューを作成 */
@@ -48,7 +51,7 @@ function script() {
     return rslt;
   }
   // 追加するプロジェクト
-  const project = `my-knowledge`;
+  const project = projectName || `my-knowledge`;
   // プロンプトに表示されるテキスト
   const promptTxt = (Title)=>`Scrap "${Title}" to ${project}.`;
   // 置換対応マップ
