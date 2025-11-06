@@ -1,9 +1,3 @@
-// self.importScripts("data.js");
-
-let projectName;
-chrome.storage.local.get("projectName", (data) => {
-  projectName = data["projectName"] || "my-knowledge";
-})
 
 chrome.runtime.onInstalled.addListener(function (details) {
   /* コンテキストメニューを作成 */
@@ -31,6 +25,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 async function script() {
   console.log("window.location.origin ->", window.location.origin);
 
+  // 追加するプロジェクト
   const data = await chrome.storage.local.get("projectName");
   const project = data["projectName"] || "my-knowledge";
   console.log(data);
@@ -56,15 +51,6 @@ async function script() {
     }
     return rslt;
   }
-  // 追加するプロジェクト
-  // const project = projectName || `my-knowledge`;
-  // let project;
-  // const project = (async function () {
-  //   const pn;// projectName
-  //   await chrome.storage.local.get("projectName", (data) => pn = data["projectName"] || "my-knowledge");
-  //   return pn;
-  // })();
-  // chrome.storage.local.get("projectName", (data) => project = data["projectName"] || "my-knowledge");
   // プロンプトに表示されるテキスト
   const promptTxt = (Title)=>`Scrap "${Title}" to ${project}.`;
   // 置換対応マップ
