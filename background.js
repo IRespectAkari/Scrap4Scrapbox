@@ -1,3 +1,7 @@
+self.importScripts("data.js");
+
+defaultData
+
 chrome.runtime.onInstalled.addListener(function (details) {
   /* コンテキストメニューを作成 */
   const contextMenu = chrome.contextMenus.create({
