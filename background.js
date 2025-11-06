@@ -28,10 +28,13 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 // const script = ()=>{var w=window;var t=document.title;var tt=w.prompt(`Scrap "${t}" to my-knowledge.`,t);if (!tt) return;var ls=['['+tt+' '+w.location.href+']'];var q=w.getSelection().toString();if (q.trim()) ls=ls.concat(q.split(/\n/g).map(l=>' > '+l));ls.push('');ls.push('#ブックマーク');var e=encodeURIComponent;var b=e(ls.join('\n'));w.open('https://scrapbox.io/my-knowledge/'+e(tt.trim())+'?body='+b,'新規ページ作成','top=100,left=1000,width=700,height=500')};
 
 
-function script() {
+async function script() {
   console.log("window.location.origin ->", window.location.origin);
 
-  const getPN = async () => 
+  const data = await chrome.storage.local.get("projectName");
+  const project = data["projectName"] || "my-knowledge";
+  console.log(data);
+  console.log(project);
 
   const regList = [
     `[0-9]`,
