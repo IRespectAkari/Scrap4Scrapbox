@@ -2,7 +2,7 @@
 
 let projectName;
 chrome.storage.local.get("projectName", (data) => {
-  projectName = data["projectName"] || "my-knowldge";
+  projectName = data["projectName"] || "my-knowledge";
 })
 
 chrome.runtime.onInstalled.addListener(function (details) {
@@ -27,8 +27,11 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 // const script = ()=>{var t=window.prompt(`Scrap "${document.title}" to my-knowledge.`,document.title);if (!t) return;var ls=['['+document.title+' '+window.location.href+']'];var q=window.getSelection().toString();if (q.trim()) ls=ls.concat(q.split(/\n/g).map(l=>' > '+l));ls.push('');ls.push('#ブックマーク');var b=encodeURIComponent(ls.join('\n'));window.open('https://scrapbox.io/my-knowledge/'+encodeURIComponent(t.trim())+'?body='+b,'新規ページ作成','top=100,left=1000,width=700,height=500')};
 // const script = ()=>{var w=window;var t=document.title;var tt=w.prompt(`Scrap "${t}" to my-knowledge.`,t);if (!tt) return;var ls=['['+tt+' '+w.location.href+']'];var q=w.getSelection().toString();if (q.trim()) ls=ls.concat(q.split(/\n/g).map(l=>' > '+l));ls.push('');ls.push('#ブックマーク');var e=encodeURIComponent;var b=e(ls.join('\n'));w.open('https://scrapbox.io/my-knowledge/'+e(tt.trim())+'?body='+b,'新規ページ作成','top=100,left=1000,width=700,height=500')};
 
+
 function script() {
   console.log("window.location.origin ->", window.location.origin);
+
+  const getPN = async () => 
 
   const regList = [
     `[0-9]`,
@@ -51,7 +54,14 @@ function script() {
     return rslt;
   }
   // 追加するプロジェクト
-  const project = projectName || `my-knowledge`;
+  // const project = projectName || `my-knowledge`;
+  // let project;
+  // const project = (async function () {
+  //   const pn;// projectName
+  //   await chrome.storage.local.get("projectName", (data) => pn = data["projectName"] || "my-knowledge");
+  //   return pn;
+  // })();
+  // chrome.storage.local.get("projectName", (data) => project = data["projectName"] || "my-knowledge");
   // プロンプトに表示されるテキスト
   const promptTxt = (Title)=>`Scrap "${Title}" to ${project}.`;
   // 置換対応マップ
