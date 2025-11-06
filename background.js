@@ -81,9 +81,15 @@ function script() {
     case 'https://kotobank.jp/word':
       dataJson.tags.push("コトバンク");
       break;
+    case 'https://www.tohoho-web.com':
+    case 'https://ja.wikipedia.org':
+      const splitTitle = document.title.split(" - ");
+      dataJson.title = splitTitle[0];
+      dataJson.tags.push(splitTitle[1]);
+      break;
     // 通常時の動作
     default:
-      dataJson.tags.push("後で読みたいサイト")
+      dataJson.tags.push("後で読みたいサイト");
       break;
   }
 
