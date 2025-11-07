@@ -4,12 +4,6 @@
 const defaultProjectName = "my-knowledge";
 const defaultTags = ["途中", "ブックマーク"];
 
-// chrome.storage.local.get("projectName", (data) => {
-//   const projectName = data["projectName"] || defaultProjectName;
-//   $("#nowProjectName").appendChild(create("span", projectName));
-//   console.log("load projectName: ", projectName);
-// });
-
 
 // プロジェクト名をchrome.storageに追加し、nowProjectNameに設定
 function setProjectName(e) {
