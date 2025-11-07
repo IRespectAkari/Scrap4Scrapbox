@@ -26,7 +26,7 @@ async function script() {
   console.log("window.location.origin ->", window.location.origin);
 
   // 追加するプロジェクト
-  const data = await chrome.storage.local.get("projectName");
+  const data = await chrome.storage.local.get();
   const project = data["projectName"] || "my-knowledge";
   const tags = data["tags"] || ["途中", "ブックマーク"];
   console.log(data);
