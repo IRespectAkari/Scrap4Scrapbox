@@ -3,3 +3,8 @@ div#settings {
   flex-direction: column;
   align-items: center;
 }
+
+div#tags {
+  display: flex;
+  flex-direction: column;
+}
