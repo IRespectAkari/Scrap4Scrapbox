@@ -29,6 +29,7 @@ function addTag(e) {
   // 既に存在する場合は何もせず終了
   if (tags.includes(newTag)) return;
 
+  $(`input[name="tag"]`).value = "";
   tags.push(newTag);
   chrome.storage.local.set({ tags: tags });
   $("#tags").appendChild(create("span", newTag));
