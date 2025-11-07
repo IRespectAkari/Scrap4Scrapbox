@@ -15,4 +15,4 @@ function setProjectName(e) {
   console.log("set projectName: ", newProjectName);
 }
 
-$("#submit").addEventListener("click", setProjectName);
+$("#registration").addEventListener("click", setProjectName);
