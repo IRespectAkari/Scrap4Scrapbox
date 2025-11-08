@@ -1,0 +1,4 @@
+new URL("https://developer.chrome.com/docs/extensions/how-to/security/sandboxing-eval?hl=ja").origin
+function getOrigin(url){
+  return new URL("https://developer.chrome.com/docs/extensions/how-to/security/sandboxing-eval?hl=ja").origin;
+}
