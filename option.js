@@ -50,3 +50,9 @@ return;
   console.log("load tags: ", tags);
 }
 initializer();
+
+
+// オリジンを返す
+function getOrigin(url){
+  return new URL("https://developer.chrome.com/docs/extensions/how-to/security/sandboxing-eval?hl=ja").origin;
+}
