@@ -28,7 +28,7 @@ function addTag(e) {
   chrome.storage.local.set({ tags: tags });
   $("#tags").appendChild(create("span", newTag));
 }
-// $("#tagAddBtn").addEventListener("click", addTag);
+$("#tagAddBtn").addEventListener("click", addTag);
 
 
 // 初期化処理
@@ -42,7 +42,7 @@ async function initializer() {
 
   $("#nowProjectName").appendChild(create("span", projectName));
   console.log("load projectName: ", projectName);
-return;
+
   const tagsDiv = $("#tags");
   tags
     .map(e=>create("span", e))

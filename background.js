@@ -26,10 +26,12 @@ async function script() {
   console.log("window.location.origin ->", window.location.origin);
 
   // 追加するプロジェクト
-  const data = await chrome.storage.local.get("projectName");
+  const data = await chrome.storage.local.get();
   const project = data["projectName"] || "my-knowledge";
+  const tags = data["tags"] || ["途中", "ブックマーク"];
   console.log(data);
   console.log(project);
+  console.log(tags);
 
   const regList = [
     `[0-9]`,
@@ -64,7 +66,8 @@ async function script() {
   const dataJson = {
     title: document.title,
     quoteURL: (t)=>`[${t} ${window.location.href}]`,
-    tags: ["途中", "ブックマーク"]
+    // tags: ["途中", "ブックマーク"]
+    tags: tags
   };
   switch(window.location.origin) {
     case "https://scrapbox.io":
