@@ -14,6 +14,14 @@ function setProjectName(e) {
 }
 $("#projectName-registration").addEventListener("click", setProjectName);
 
+// タグ用のlabelを生成
+function createTag(tagName) {
+  const input = create("input", null, { type: "checkbox" });
+  const span = create("span", tagName);
+  const tag = create("label", [input, span]);
+
+  return tag;
+}
 
 // タグが重複してなければchrome.storageに追加し、タグ一覧に追加
 function addTag(e) {
