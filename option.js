@@ -34,7 +34,8 @@ function addTag(e) {
   $(`input[name="tag"]`).value = "";
   tags.push(newTag);
   chrome.storage.local.set({ tags: tags });
-  $("#tags").appendChild(create("span", newTag));
+  // $("#tags").appendChild(create("span", newTag));
+  $("#tags").appendChild(createTag(newTag));
 }
 $("#tagAddBtn").addEventListener("click", addTag);
 
@@ -53,7 +54,8 @@ async function initializer() {
 
   const tagsDiv = $("#tags");
   tags
-    .map(e=>create("span", e))
+    // .map(e=>create("span", e))
+    .map(createTag)
     .forEach(e=>tagsDiv.appendChild(e));
   console.log("load tags: ", tags);
 }
