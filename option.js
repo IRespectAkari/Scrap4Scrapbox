@@ -14,11 +14,22 @@ function setProjectName(e) {
 }
 $("#projectName-registration").addEventListener("click", setProjectName);
 
+// タグ削除ボタン
+function removeTag(e) {
+  const closestSpan = e.target.closest(".tag");
+  closestSpan.remove();
+
+  const tags = $$("#tags span:not(.tag)").map(e=>e.textContent);
+  chrome.storage.local.set({ tags: tags });
+}
+
 // タグ用のlabelを生成
 function createTag(tagName) {
-  const input = create("input", null, { type: "checkbox" });
-  const span = create("span", tagName);
-  const tag = create("label", [input, span]);
+  const input    = create("input", null, { type: "checkbox" });
+  const rmButton = create("button", "削除", { events: { click: removeTag } });
+  const span     = create("span", tagName);
+  const label    = create("label", [input, span]);
+  const tag      = create("span", [label, rmButton], { classList: ["tag"] });
 
   return tag;
 }
@@ -26,7 +37,7 @@ function createTag(tagName) {
 // タグが重複してなければchrome.storageに追加し、タグ一覧に追加
 function addTag(e) {
   const newTag = $(`input[name="tag"]`).value.trim();
-  const tags = $$("#tags > *").map(e=>e.textContent);
+  const tags = $$("#tags span:not(.tag)").map(e=>e.textContent);
 
   // 既に存在する場合は何もせず終了
   if (tags.includes(newTag)) return;
