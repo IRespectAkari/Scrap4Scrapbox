@@ -121,7 +121,7 @@ async function script() {
   }
   lines.push(``);
   // (空白|^#)が含まれるならブラケット、でないなら先頭に#、その後lineに追加
-  dataJson.tags.map(e => /(\s|^#)/.test(e) ? `[${e}]` : `#${e}`).reverse().forEach(e => lines.push(e));
+  dataJson.tags.map(e => /(\s|^#)/.test(e) ? `[${e}]` : `#${e}`).forEach(e => lines.push(e));
   const body = encodeURIComponent(lines.join(`\n`));
 
   // ページ作成実行
