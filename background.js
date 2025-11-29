@@ -73,32 +73,32 @@ async function script() {
     case "https://scrapbox.io":
       dataJson.title = document.title.split(" - ")[0];
       dataJson.quoteURL = (t) => `[${decodeURIComponent(window.location.pathname)}]`;
-      dataJson.tags.push(document.title.split(" - ")[1]);
+      dataJson.tags.unshift(document.title.split(" - ")[1]);
       break;
     case 'https://www.youtube.com':
       if (window.location.pathname == "/watch") {
         dataJson.title = document.querySelector(`#title > h1 > yt-formatted-string`).title;
         dataJson.quoteURL = (t)=>`${t} - [YouTube]\n[${window.location.href}]`;
-        dataJson.tags.push("後で見る動画");
-        dataJson.tags.push(document.querySelector(`#text > a`).innerText);
+        dataJson.tags.unshift("後で見る動画");
+        dataJson.tags.unshift(document.querySelector(`#text > a`).innerText);
       }
       break;
     case 'https://atmarkit.itmedia.co.jp':
       dataJson.title = document.title.split(" - ")[0];
-      dataJson.tags.push(`＠IT`);
+      dataJson.tags.unshift(`＠IT`);
       break;
     case 'https://kotobank.jp/word':
-      dataJson.tags.push("コトバンク");
+      dataJson.tags.unshift("コトバンク");
       break;
     case 'https://www.tohoho-web.com':
     case 'https://ja.wikipedia.org':
       const splitTitle = document.title.split(" - ");
       dataJson.title = splitTitle[0];
-      dataJson.tags.push(splitTitle[1]);
+      dataJson.tags.unshift(splitTitle[1]);
       break;
     // 通常時の動作
     default:
-      dataJson.tags.push("後で読みたいサイト");
+      dataJson.tags.unshift("後で読みたいサイト");
       break;
   }
 
